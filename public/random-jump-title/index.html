@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ジャンプの歴代作品をランダムで表示</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">週刊少年ジャンプ</p>
+      <h1>ジャンプの歴代作品を<br>ランダムで表示</h1>
+      <p>ボタンを押すと、歴代の連載作品から一つ表示します。</p>
+      <button id="draw" type="button">作品を表示する</button>
+      <p id="status" role="status" aria-live="polite"></p>
+      <section id="result" aria-label="選ばれた作品" hidden>
+        <h2 id="title"></h2>
+        <dl>
+          <div><dt>作者</dt><dd id="author"></dd></div>
+          <div><dt>開始号</dt><dd id="start-issue"></dd></div>
+          <div><dt>終了号</dt><dd id="end-issue"></dd></div>
+        </dl>
+      </section>
+      <footer>データ出典：<a href="https://ja.wikipedia.org/wiki/週刊少年ジャンプ連載作品の一覧">Wikipedia「週刊少年ジャンプ連載作品の一覧」</a></footer>
+    </main>
+  </body>
+</html>
