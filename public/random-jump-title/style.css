@@ -23,7 +23,7 @@ button:hover { background: #19458d; }
 button:disabled { opacity: .6; cursor: wait; }
 :focus-visible { outline: 3px solid #245bb5; outline-offset: 4px; }
 #status { min-height: 1.7em; }
-#result { background: white; padding: 24px; border-radius: 12px; overflow-wrap: anywhere; }
+#result { box-sizing: border-box; background: white; padding: 24px; border-radius: 12px; overflow-wrap: anywhere; }
 h2 { margin-top: 0; }
 dl { margin-bottom: 0; }
 dl div { display: grid; grid-template-columns: 5em 1fr; gap: 12px; padding: 8px 0; }
