@@ -17,7 +17,10 @@ function setLinkedText(element, text, url) {
 button.addEventListener("click", async () => {
   button.disabled = true;
   status.textContent = "作品を選んでいます…";
-  result.hidden = true;
+  if (!result.hidden) {
+    // 更新中や短い作品名への切り替えでページが縮み、スクロール位置が動くのを防ぐ。
+    result.style.minHeight = `${result.getBoundingClientRect().height}px`;
+  }
 
   try {
     const response = await fetch("/api/random-jump-title", { cache: "no-store" });
