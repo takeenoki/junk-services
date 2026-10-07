@@ -6,10 +6,9 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit",
-    "test:api": "node --experimental-strip-types --test tests/random-jump-title/api.test.mjs",
-    "db:migrate:local": "wrangler d1 migrations apply junk-services --local",
-    "db:seed:local": "wrangler d1 execute junk-services --local --file=seeds/local/random-jump-title-data.sql"
-  },
+    "test:api": "node --experimental-strip-types --test",
+    "db:migrate:local": "wrangler d1 migrations apply junk-services --local"
+},
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261006.1",
     "typescript": "^5.9.3",

@@ -1,4 +1,5 @@
 import { handleRandomJumpTitle } from "./api/random-jump-title/index";
+import { handleAboutMe } from "./api/about_me";
 
 interface Env {
   DB: D1Database;
@@ -11,6 +12,10 @@ export default {
 
     if (path === "/api/random-jump-title") {
       return handleRandomJumpTitle(request, env.DB);
+    }
+
+    if (path === "/api/about-me") {
+      return handleAboutMe(request, env.DB);
     }
 
     if (path.startsWith("/api/")) {
