@@ -1,0 +1,4 @@
+CREATE TABLE about_me (
+    id INTEGER NOT NULL PRIMARY KEY,
+    access_count INTEGER NOT NULL DEFAULT 0
+);
