@@ -1,0 +1,35 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #20334d;
+  background: #f0f5fc;
+  line-height: 1.7;
+}
+body { margin: 0; }
+main { max-width: 680px; margin: 64px auto; padding: 0 24px; }
+.eyebrow { color: #245bb5; font-weight: 700; letter-spacing: .12em; }
+h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); line-height: 1.5; }
+button {
+  margin-top: 16px;
+  padding: 14px 28px;
+  border: 0;
+  border-radius: 8px;
+  background: #245bb5;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover { background: #19458d; }
+button:disabled { opacity: .6; cursor: wait; }
+:focus-visible { outline: 3px solid #245bb5; outline-offset: 4px; }
+#status { min-height: 1.7em; }
+#result { box-sizing: border-box; background: white; padding: 24px; border-radius: 12px; overflow-wrap: anywhere; }
+h2 { margin-top: 0; }
+dl { margin-bottom: 0; }
+.amazon-search { margin: 32px 0 0; }
+dl div { display: grid; grid-template-columns: 5em 1fr; gap: 12px; padding: 8px 0; }
+dt { color: #536780; }
+dd { margin: 0; }
+a { color: #245bb5; text-underline-offset: 3px; }
+footer { margin-top: 40px; font-size: .8rem; color: #536780; }
+@media (max-width: 480px) { main { margin-top: 32px; } }
