@@ -1,5 +1,49 @@
 # Junk Services
 
+## random-magazine-title
+
+`/random-magazine-title/` のボタンで歴代の週刊少年マガジン連載作品を一つ表示する。
+ジャンプ版のデザインと表示項目を踏襲し、Amazon検索リンクはフロントで作品名と作者名から組み立てる。
+`GET /api/random-magazine-title` は `title`, `title_url`, `author`, `author_url`,
+`start_issue`, `end_issue` を返す。リンクがない項目のURLは null。
+データ未登録は404、DBエラーは500、GET以外は405。結果はキャッシュしない。
+
+```sh
+npm ci
+npm run db:migrate:local
+npx wrangler d1 execute junk-services --local --file=seeds/local/random-magazine-title-data.sql
+npm run dev
+```
+
+`http://localhost:8787/random-magazine-title/` を開く。ローカル用データは架空の作品。
+実作品のSQL生成とローカル適用は以下の手動実行で行う。
+
+```sh
+python -m pip install -r tools/random-magazine-title/requirements.txt
+python tools/random-magazine-title/generate_sql.py
+npx wrangler d1 execute junk-services --local --file=seeds/random-magazine-title-data.sql
+```
+
+既存構成に合わせ `seeds/random-magazine-title-data.sql` に出力し、毎回同名で更新する。
+`--html 保存済み.html` で通信なしでも生成できる。定期実行・自動リトライは行わない。
+「年別掲載作品一覧」のテーブルのみを取り込み、非表示のソート文字・脚注と、
+作品情報がコメント化された空行を除く。リンクがなければURLはNULL。
+通常号は `2000年1号`、合併号は `2000年2/3号`、連載中作品は `連載中` とする。
+複数期間は `2026年12号／2026年41号` のように各号を変換し、`移籍中` の記載を保持する。
+空データ・未対応表記・解析失敗では既存SQLを更新しない。
+SQLは `magazine_titles` のみを削除・再投入するため再実行しても重複しない。
+新規スキーマは `migrations/0004_create_magazine_titles.sql` に配置する。
+本番へのDML適用は明示的な指示がある場合のみ行う。
+
+```sh
+npm run typecheck
+npm run test:api
+python -m unittest discover -s tools/random-magazine-title -p "test_*.py"
+```
+
+データ出典：Wikipedia contributors「[週刊少年マガジン連載作品の一覧](https://ja.wikipedia.org/wiki/週刊少年マガジン連載作品の一覧)」。
+利用・再配布時は出典ページのCC BY-SAライセンス条件を確認する。
+
 ## random-sunday-title
 
 `/random-sunday-title/` のボタンで歴代の週刊少年サンデー連載作品を一つ表示する。
