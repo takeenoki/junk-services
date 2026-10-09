@@ -33,6 +33,10 @@ button.addEventListener("click", async () => {
     setLinkedText(document.querySelector("#author"), data.author, data.author_url);
     document.querySelector("#start-issue").textContent = data.start_issue;
     document.querySelector("#end-issue").textContent = data.end_issue;
+    const amazonSearch = document.querySelector("#amazon-search");
+    const searchParams = new URLSearchParams({ k: `${data.title} ${data.author}` });
+    amazonSearch.href = `https://www.amazon.co.jp/s?${searchParams}`;
+    amazonSearch.textContent = `${data.title}をアマゾンで探す`;
     result.hidden = false;
     status.textContent = "作品を表示しました。";
   } catch (error) {

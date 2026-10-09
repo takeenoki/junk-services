@@ -26,6 +26,7 @@ button:disabled { opacity: .6; cursor: wait; }
 #result { box-sizing: border-box; background: white; padding: 24px; border-radius: 12px; overflow-wrap: anywhere; }
 h2 { margin-top: 0; }
 dl { margin-bottom: 0; }
+.amazon-search { margin: 32px 0 0; }
 dl div { display: grid; grid-template-columns: 5em 1fr; gap: 12px; padding: 8px 0; }
 dt { color: #536780; }
 dd { margin: 0; }
