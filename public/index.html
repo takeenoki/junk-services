@@ -1,9 +1,36 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Junk Services</title>
-    </head>
-    <body>
-        <h1>Junk Services</h1>
-    </body>
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Junk Services</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/index-page/style.css">
+    <script src="/index-page/script.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <header><h1>Junk Services</h1></header>
+      <section aria-labelledby="discover-heading">
+        <h2 id="discover-heading">発見<span lang="en"> / Discover</span></h2>
+        <div class="service-grid">
+          <article class="service-card">
+            <h3><a href="/random-jump-title/">ジャンプの歴代作品を<br/>ランダムで表示</a></h3>
+            <p class="description" id="random-jump-title-description">週刊少年ジャンプの歴代連載作品から、ボタンを押すと一つをランダムに表示</p>
+            <button type="button" aria-expanded="false" aria-controls="random-jump-title-description" hidden>もっと読む</button>
+          </article>
+          <article class="service-card">
+            <h3><a href="/random-sunday-title/">サンデーの歴代作品を<br/>ランダムで表示</a></h3>
+            <p class="description" id="random-sunday-title-description">週刊少年サンデーの歴代連載作品から、ボタンを押すと一つをランダムに表示</p>
+            <button type="button" aria-expanded="false" aria-controls="random-sunday-title-description" hidden>もっと読む</button>
+          </article>
+          <article class="service-card">
+            <h3><a href="/random-magazine-title/">マガジンの歴代作品を<br/>ランダムで表示</a></h3>
+            <p class="description" id="random-magazine-title-description">週刊少年マガジンの歴代連載作品から、ボタンを押すと一つをランダムに表示</p>
+            <button type="button" aria-expanded="false" aria-controls="random-magazine-title-description" hidden>もっと読む</button>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
