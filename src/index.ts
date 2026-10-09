@@ -1,3 +1,4 @@
+import { handleRandomMagazineTitle } from "./api/random-magazine-title/index";
 import { handleRandomJumpTitle } from "./api/random-jump-title/index";
 import { handleRandomSundayTitle } from "./api/random-sunday-title/index";
 import { handleAboutMe } from "./api/about_me";
@@ -17,6 +18,10 @@ export default {
 
     if (path === "/api/random-sunday-title") {
       return handleRandomSundayTitle(request, env.DB);
+    }
+
+    if (path === "/api/random-magazine-title") {
+      return handleRandomMagazineTitle(request, env.DB);
     }
 
     if (path === "/api/about-me") {
