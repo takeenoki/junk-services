@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Junk Services</title>
+  <rect x="1" y="1" width="30" height="30" fill="#fff" stroke="#245bb5"/>
+  <path d="M15 7h10v3h-3v11c0 5-3 7-7 7s-7-3-7-7h4c0 2 1 4 3 4s4-1 4-4V10h-4Z" fill="#245bb5"/>
+</svg>

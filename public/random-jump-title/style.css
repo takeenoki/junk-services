@@ -5,7 +5,7 @@
   line-height: 1.7;
 }
 body { margin: 0; }
-main { max-width: 680px; margin: 64px auto; padding: 0 24px; }
+main { max-width: 680px; margin: 20px auto 64px; padding: 0 24px; }
 .eyebrow { color: #245bb5; font-weight: 700; letter-spacing: .12em; }
 h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); line-height: 1.5; }
 button {
@@ -32,4 +32,3 @@ dt { color: #536780; }
 dd { margin: 0; }
 a { color: #245bb5; text-underline-offset: 3px; }
 footer { margin-top: 40px; font-size: .8rem; color: #536780; }
-@media (max-width: 480px) { main { margin-top: 32px; } }
