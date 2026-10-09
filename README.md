@@ -1,5 +1,51 @@
 # Junk Services
 
+## random-sunday-title
+
+`/random-sunday-title/` のボタンで歴代の週刊少年サンデー連載作品を一つ表示する。
+ジャンプ版と同じデザイン・表示項目（作品名、作者、開始号、終了号、Amazon検索リンク）を使用する。
+`GET /api/random-sunday-title` は `title`, `title_url`, `author`, `author_url`,
+`start_issue`, `end_issue` を JSON で返す。URLがない項目は null。
+キャッシュせず、データ未登録は404、DBエラーは500、GET以外は405を返す。
+
+### ローカル起動とデータ生成
+
+```sh
+npm ci
+npm run db:migrate:local
+npx wrangler d1 execute junk-services --local --file=seeds/local/random-sunday-title-data.sql
+npm run dev
+```
+
+`http://localhost:8787/random-sunday-title/` を開く。ローカル用データは架空の作品。
+実作品のSQLは以下の手動実行で生成・適用する。
+
+```sh
+python -m pip install -r tools/random-sunday-title/requirements.txt
+python tools/random-sunday-title/generate_sql.py
+npx wrangler d1 execute junk-services --local --file=seeds/random-sunday-title-data.sql
+```
+
+生成先は既存構成に合わせて `seeds/random-sunday-title-data.sql` とし、同名で更新する。
+定期実行・自動リトライは行わない。`--html 保存済み.html` で通信なしでも生成できる。
+作品一覧テーブルをDOM IDと列見出しで識別し、非表示のソート文字や脚注を除く。
+合併号は `1970年2/3号` の形式、連載中作品は `連載中` として保存する。
+号数がなく年のみの場合は `1969年` とし、その他の不詳表記は原文を保持する。
+空データや解析失敗では既存SQLを更新しない。
+
+SQLは `sunday_titles` のみを削除・再投入するため再適用しても重複しない。
+スキーマは `migrations/0003_create_sunday_titles.sql` で追加する。
+本番へのDML適用は明示的な指示がある場合のみ行う。
+
+```sh
+npm run typecheck
+npm run test:api
+python -m unittest discover -s tools/random-sunday-title -p "test_*.py"
+```
+
+データ出典：Wikipedia contributors「[週刊少年サンデー連載作品の一覧](https://ja.wikipedia.org/wiki/週刊少年サンデー連載作品の一覧)」。
+利用・再配布時は出典ページのCC BY-SAライセンス条件を確認する。
+
 ## random-jump-title
 
 `/random-jump-title/` のボタンで歴代の週刊少年ジャンプ連載作品を一つ表示する。
