@@ -15,7 +15,13 @@
 			"binding": "DB",
 			"database_name": "junk-services",
 			"database_id": "8546c7a5-f1bd-4878-b2d6-4310b0d2474d",
-      "migrations_dir": "migrations"
+    		"migrations_dir": "migrations"
 		},
-	]
+	],
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"invocation_logs": true
+		}
+	}
 }
