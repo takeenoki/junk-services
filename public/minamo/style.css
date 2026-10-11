@@ -1,0 +1,23 @@
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #102b30; color: #e0e7de; }
+* { box-sizing: border-box; }
+body { margin: 0; height: 100dvh; display: flex; flex-direction: column; }
+main { position: relative; flex: 1; min-height: 0; overflow: hidden; }
+canvas { display: block; width: 100%; height: 100%; touch-action: manipulation; cursor: crosshair; }
+.title { position: absolute; top: 28px; left: 32px; pointer-events: none; }
+h1 { font-family: Georgia, serif; font-weight: normal; letter-spacing: .22em; font-size: 30px; margin: 0; }
+.title p { font-size: 11px; letter-spacing: .15em; opacity: .55; }
+footer { display: flex; gap: 36px; align-items: center; padding: 22px 32px calc(22px + env(safe-area-inset-bottom)); background: #0d2226; border-top: 1px solid #ffffff12; }
+.instruction { flex: 1; font-size: 13px; }
+small { display: block; margin-top: 6px; color: #92aaa4; font-size: 11px; }
+.gauge { width: 160px; }
+label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
+label span { color: #92aaa4; }
+progress { width: 100%; height: 4px; border: 0; background: #294247; accent-color: #c4b37e; }
+progress::-webkit-progress-bar { background: #294247; }
+progress::-webkit-progress-value { background: #c4b37e; }
+@media (max-width: 600px) {
+  footer { flex-wrap: wrap; gap: 18px; padding: 18px 22px calc(18px + env(safe-area-inset-bottom)); }
+  .instruction { flex-basis: 100%; }
+  .gauge { flex: 1; width: auto; }
+  .title { top: 22px; left: 22px; }
+}
