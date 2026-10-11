@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="water"><stop stop-color="#255154"/><stop offset="1" stop-color="#102b30"/></radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#water)"/>
+  <g fill="none" stroke="#c9ded2">
+    <circle cx="870" cy="330" r="70" opacity=".45"/>
+    <circle cx="870" cy="330" r="115" opacity=".3"/>
+    <circle cx="870" cy="330" r="165" opacity=".2"/>
+    <circle cx="870" cy="330" r="220" opacity=".12"/>
+    <circle cx="870" cy="330" r="280" opacity=".06"/>
+  </g>
+  <g transform="translate(950 230) rotate(-28)">
+    <path d="M-30 0C-10-32 23-25 36 0C12 28-14 24-30 0Z" fill="#bb9658"/>
+    <path d="M-37 0H25" stroke="#75603e" stroke-width="2"/>
+  </g>
+  <text x="100" y="292" fill="#e0e7de" font-family="Georgia, serif" font-size="88" letter-spacing="16">minamo</text>
+  <text x="105" y="358" fill="#c9d6cc" font-family="Yu Gothic, Meiryo, sans-serif" font-size="27" letter-spacing="3">同じ水面に、だれかの気配。</text>
+</svg>

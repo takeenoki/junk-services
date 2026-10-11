@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>minamo</title>
+  <rect width="64" height="64" rx="14" fill="#193d40"/>
+  <g fill="none" stroke="#c9ded2" stroke-width="2">
+    <circle cx="28" cy="34" r="8" opacity=".9"/>
+    <circle cx="28" cy="34" r="16" opacity=".6"/>
+    <circle cx="28" cy="34" r="24" opacity=".3"/>
+  </g>
+  <path d="M37 18C40 8 51 8 55 12C51 23 42 25 37 18Z" fill="#bb9658"/>
+  <path d="M36 21L50 13" stroke="#75603e" stroke-width="1.5"/>
+</svg>

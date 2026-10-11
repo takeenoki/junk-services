@@ -23,5 +23,9 @@
 			"enabled": true,
 			"invocation_logs": true
 		}
-	}
+	},
+	"durable_objects": {
+		"bindings": [{ "name": "MINAMO", "class_name": "Minamo" }]
+	},
+	"migrations": [{ "tag": "minamo-v1", "new_sqlite_classes": ["Minamo"] }]
 }
