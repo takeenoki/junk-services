@@ -62,7 +62,7 @@ function apply(snapshot, initial = false) {
     if (snapshot.debugMode !== undefined) {
         debugMode = snapshot.debugMode;
         clearButton.hidden = !debugMode;
-        element("post-hint").textContent = `${debugMode ? "5秒" : "1時間"}に一度音を追加できます`;
+        element("post-hint").textContent = `${debugMode ? "5秒" : "1時間"}に一度音を追加できます。`;
     }
     render();
 }
