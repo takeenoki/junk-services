@@ -1,5 +1,18 @@
 # Junk Services
 
+## beepers
+
+`/beepers/` で共有する10秒のループにBEEP音を投稿します。
+単一のDurable Objectで最大100音を保持し、WebSocketで同期します。
+
+```sh
+npm run build:beepers
+npm run dev:beepers
+```
+
+デバッグ時は5秒間隔で投稿可能。本番では署名付きCookieによる1時間制限が有効です。
+API、音声再生、統合テストの詳細は [BEEPERS README](public/beepers/README.md) を参照してください。
+
 ## random-magazine-title
 
 `/random-magazine-title/` のボタンで歴代の週刊少年マガジン連載作品を一つ表示する。
