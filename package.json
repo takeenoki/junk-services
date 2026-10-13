@@ -4,8 +4,10 @@
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
+    "dev:beepers": "wrangler dev --var ENABLE_POST_LIMIT:false",
+    "build:beepers": "tsc -p tsconfig.beepers.json",
     "deploy": "wrangler deploy",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.beepers.json --noEmit",
     "test:api": "node --experimental-strip-types --test",
     "db:migrate:local": "wrangler d1 migrations apply junk-services --local"
 },

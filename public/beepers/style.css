@@ -1,0 +1,56 @@
+:root { color-scheme: dark; font-family: ui-monospace, SFMono-Regular, Consolas, "Noto Sans", monospace; color: #dbe4dc; background: #111715; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 980px; margin: auto; padding: 56px 28px 32px; }
+header { margin-bottom: 36px; }
+h1 { font-size: clamp(46px, 9vw, 84px); margin: 8px 0; letter-spacing: -.07em; line-height: 1; }
+h1 span { color: #c3f577; font-size: .25em; vertical-align: top; margin-left: 12px; }
+.track-panel { background: #19221e; border: 1px solid #354238; border-radius: 12px; padding: 22px; }
+.track-heading, .track-footer, .controls-heading { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+.track-heading { font-size: 11px; letter-spacing: .08em; }
+#connection { color: #c3f577; }
+.ruler { display: flex; justify-content: space-between; color: #8c9f90; font-size: 10px; margin: 24px 0 8px; }
+#timeline { height: 220px; position: relative; overflow: hidden; border: 1px solid #354238; background: repeating-linear-gradient(to right, transparent 0, transparent calc(10% - 1px), #2c3930 calc(10% - 1px), #2c3930 10%); }
+#sounds { position: absolute; inset: 0; }
+.sound { position: absolute; height: 8px; min-width: 2px; border-radius: 2px; background: #c3f577; }
+.sound.pending { outline: 1px dashed #dbe4dc; }
+#playhead { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff1b7; box-shadow: 0 0 12px #fff1b788; }
+#empty { position: absolute; inset: 80px 0 auto; text-align: center; color: #7c9182; font-size: 12px; }
+.track-footer { font-size: 10px; color: #9ba89d; margin-top: 14px; }
+#position { color: #fff1b7; font-variant-numeric: tabular-nums; }
+.controls { margin-top: 36px; }
+h2 { font-size: 18px; font-weight: 500; margin: 0; }
+#availability { color: #c3f577; font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+.hint { font-size: 12px; color: #9ba89d; line-height: 1.8; }
+.tone-buttons { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 22px; }
+[hidden] { display: none !important; }
+.tab-instructions { font-size: 12px; line-height: 1.8; color: #9ba89d; }
+.tabs { display: flex; gap: 8px; border-bottom: 1px solid #354238; margin-bottom: 20px; }
+.tabs button, #clear { font: inherit; color: #9ba89d; background: #19221e; border: 1px solid #354238; padding: 12px 20px; border-radius: 7px 7px 0 0; cursor: pointer; }
+.tabs button[aria-selected="true"] { color: #c3f577; border-bottom-color: #c3f577; }
+.tabs button:focus-visible, #clear:focus-visible { outline: 2px solid #c3f577; }
+#clear { margin-top: 24px; border-radius: 7px; }
+#clear:disabled { opacity: .4; cursor: default; }
+.tone { font: inherit; text-align: left; background: #19221e; color: #dbe4dc; border: 1px solid #354238; padding: 16px 12px; border-radius: 7px; cursor: pointer; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.tone .number { display: block; color: #819385; font-size: 10px; margin-bottom: 12px; }
+.tone .name { font-size: 12px; letter-spacing: .05em; }
+.tone:hover:enabled, .tone:focus-visible { border-color: #c3f577; outline: 1px solid #c3f577; }
+.tone.holding { background: #c3f577; color: #111715; }
+.tone:disabled { opacity: .4; cursor: default; }
+#message { min-height: 24px; color: #fff1b7; font-size: 12px; line-height: 1.7; }
+footer { margin-top: 26px; font-size: 11px; color: #819385; line-height: 1.9; }
+#overlay { position: fixed; z-index: 10; inset: 0; width: 100%; height: 100%; background: #111715df; backdrop-filter: blur(5px); border: 0; color: #dbe4dc; font: inherit; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 28px; padding: 24px; cursor: pointer; }
+#overlay[hidden] { display: none; }
+.overlay-brand { font-size: clamp(36px, 8vw, 70px); font-weight: bold; letter-spacing: -.06em; color: #c3f577; }
+.overlay-note { font-size: 11px; color: #9ba89d; }
+@media (max-width: 600px) {
+  main { padding: 32px 16px; }
+  .track-panel { padding: 16px 12px; }
+  #timeline { height: 180px; }
+  .tone-buttons { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .tone { padding: 14px 8px; }
+  .tone .name { font-size: 10px; }
+  .controls-heading { align-items: flex-start; flex-direction: column; gap: 0; }
+  .track-footer { align-items: flex-start; }
+  #overlay { font-size: 13px; }
+}

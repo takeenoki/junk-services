@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8"><title>BEEPERS Audio Verification</title>
+<h1>Web Audioの実レンダリング検証</h1><pre id="result">検証中…</pre>
+<script type="module">
+import { AudioEngine } from "/beepers/audio.js";
+const results = [];
+try {
+  for (const duration of [.05, 3]) {
+    for (let type = 1; type <= 20; type++) {
+      const context = new OfflineAudioContext(1, Math.ceil((duration + .2) * 44100), 44100);
+      const engine = new AudioEngine(context);
+      engine.voice(type, .02, duration, 1);
+      const buffer = await context.startRendering();
+      const samples = buffer.getChannelData(0);
+      const peak = samples.reduce((maximum, sample) => Math.max(maximum, Math.abs(sample)), 0);
+      if (!Number.isFinite(peak) || peak <= 0 || peak >= .8) throw new Error(`type ${type}: invalid peak ${peak}`);
+      const tail = samples.slice(Math.ceil((duration + .05) * 44100));
+      const tailPeak = tail.reduce((maximum, sample) => Math.max(maximum, Math.abs(sample)), 0);
+      if (tailPeak > .001) throw new Error(`type ${type}: voice did not end (${tailPeak})`);
+    }
+    results.push(`PASS: 20音色すべて ${duration}秒 / 有効な出力と終了フェード`);
+  }
+  for (const decay of [false, true]) {
+    const context = new OfflineAudioContext(1, 44100 * 4, 44100);
+    const engine = new AudioEngine(context);
+    for (let index = 0; index < 100; index++) engine.voice(index % 20 + 1, .02, 3, decay ? .95 ** index : 1);
+    const buffer = await context.startRendering();
+    const peak = buffer.getChannelData(0).reduce((maximum, sample) => Math.max(maximum, Math.abs(sample)), 0);
+    if (!Number.isFinite(peak) || peak >= .8) throw new Error(`100 voices clipped: ${peak}`);
+    results.push(`PASS: 100音同時再生 (${decay ? "0.95^n減衰" : "すべて最大音量"}) peak=${peak.toFixed(5)}`);
+  }
+  const crossingContext = new OfflineAudioContext(1, 44100 * 12, 44100);
+  const crossingEngine = new AudioEngine(crossingContext);
+  crossingEngine.voice(1, 9, 2, 1);
+  const crossing = (await crossingContext.startRendering()).getChannelData(0);
+  const peakIn = (start, end) => crossing.slice(start * 44100, end * 44100)
+    .reduce((maximum, sample) => Math.max(maximum, Math.abs(sample)), 0);
+  if (peakIn(8, 9) !== 0 || peakIn(9.1, 9.9) <= 0 || peakIn(10.1, 10.9) <= 0 || peakIn(11.1, 12) > .001) {
+    throw new Error("loop-crossing sound was cut off or replayed");
+  }
+  results.push("PASS: 9秒から2秒の音が10秒境界を越えて継続し11秒で終了");
+  document.getElementById("result").textContent = results.join("\n") + "\nALL PASS";
+} catch (error) {
+  document.getElementById("result").textContent = results.join("\n") + "\nFAIL: " + error.message;
+}
+</script>
+</html>

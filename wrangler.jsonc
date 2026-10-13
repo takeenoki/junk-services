@@ -25,7 +25,13 @@
 		}
 	},
 	"durable_objects": {
-		"bindings": [{ "name": "MINAMO", "class_name": "Minamo" }]
+		"bindings": [
+			{ "name": "MINAMO", "class_name": "Minamo" },
+			{ "name": "BEEPERS", "class_name": "Beepers" }
+		]
 	},
-	"migrations": [{ "tag": "minamo-v1", "new_sqlite_classes": ["Minamo"] }]
+	"migrations": [
+		{ "tag": "minamo-v1", "new_sqlite_classes": ["Minamo"] },
+		{ "tag": "beepers-v1", "new_sqlite_classes": ["Beepers"] }
+	]
 }
