@@ -1,5 +1,10 @@
 # Junk Services
 
+## steps
+
+`/steps/` で月別の歩数を公開します。Google IDトークンと許可subで更新APIを保護します。
+設定・API・ローカル起動手順は [steps README](public/steps/README.md) を参照してください。
+
 ## beepers
 
 `/beepers/` で共有する10秒のループにBEEP音を投稿します。
