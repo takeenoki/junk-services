@@ -245,6 +245,11 @@ for (const sample of [true, false]) {
                 (starting || clearing || !connected || nextPostAtMs > serverNow())))
                 return;
             event.preventDefault();
+            void fetch("/api/beepers/log", {
+                method: "POST", headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ operation: sample ? "SAMPLE" : "PUT", type: index + 1 }),
+                signal: AbortSignal.timeout(5000),
+            }).catch(() => { });
             if (event.isTrusted)
                 button.setPointerCapture(event.pointerId);
             const pressedAtMs = serverNow();

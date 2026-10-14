@@ -69,7 +69,7 @@ function apply(snapshot: Snapshot, initial = false) {
   if (snapshot.debugMode !== undefined) {
     debugMode = snapshot.debugMode;
     clearButton.hidden = !debugMode;
-    element("post-hint").textContent = `${debugMode ? "5秒" : "1時間"}に一度音を追加できます`;
+    element("post-hint").textContent = `${debugMode ? "5秒" : "1時間"}に一度音を追加できます。`;
   }
   render();
 }
@@ -224,6 +224,11 @@ for (const sample of [true, false]) {
       if (event.button !== 0 || holding || !engine || (!sample &&
           (starting || clearing || !connected || nextPostAtMs > serverNow()))) return;
       event.preventDefault();
+      void fetch("/api/beepers/log", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ operation: sample ? "SAMPLE" : "PUT", type: index + 1 }),
+        signal: AbortSignal.timeout(5000),
+      }).catch(() => {});
       if (event.isTrusted) button.setPointerCapture(event.pointerId);
       const pressedAtMs = serverNow();
       void engine.context.resume();
