@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>武えのきの歩数 | Junk Services</title>
+    <meta name="description" content="武えのきの日々の歩数を月ごとに公開。">
+    <link rel="canonical" href="https://junk-services.r32952507.workers.dev/steps/">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/steps/style.css">
+    <script src="/steps/script.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <a class="home" href="/">Junk Services</a>
+      <header>
+        <p class="eyebrow">DAILY STEPS</p>
+        <h1>武えのきの歩数</h1>
+      </header>
+      <form id="month-form">
+        <label for="month">表示する月</label>
+        <input id="month" type="month" min="0001-01" max="9999-12" required>
+        <button type="submit">表示</button>
+      </form>
+      <section aria-labelledby="month-heading" aria-busy="true" id="results">
+        <h2 id="month-heading">月別の歩数</h2>
+        <p id="status" role="status" aria-live="polite">読み込み中…</p>
+        <div class="table-wrap">
+          <table hidden id="steps-table">
+            <caption>日別の歩数（未記録の日は「—」）</caption>
+            <thead><tr><th scope="col">日付</th><th scope="col">歩数</th></tr></thead>
+            <tbody id="days"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

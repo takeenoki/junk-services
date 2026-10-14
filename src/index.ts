@@ -3,6 +3,7 @@ import { handleRandomJumpTitle } from "./api/random-jump-title/index";
 import { handleRandomSundayTitle } from "./api/random-sunday-title/index";
 import { handleAboutMe } from "./api/about_me";
 import { handleBeepers } from "./api/beepers";
+import { handleSteps } from "./api/steps";
 export { Beepers } from "./api/beepers";
 export { Minamo } from "./api/minamo";
 
@@ -12,11 +13,17 @@ interface Env {
   MINAMO: DurableObjectNamespace;
   BEEPERS: DurableObjectNamespace;
   ENABLE_POST_LIMIT?: string;
+  STEPS_GOOGLE_CLIENT_ID?: string;
+  STEPS_GOOGLE_SUB?: string;
 }
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const path = new URL(request.url).pathname;
+
+    if (path === "/api/v1" || path.startsWith("/api/v1/")) {
+      return handleSteps(request, env);
+    }
 
     if (path.startsWith("/api/beepers/")) {
       return handleBeepers(request, env);

@@ -1,0 +1,36 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  color: #233c32;
+  background: #f3f5ef;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 680px; margin: auto; padding: 32px 20px 64px; }
+.home { color: #315b46; font-size: 14px; }
+header { margin: 48px 0 32px; }
+.eyebrow { font-size: 12px; letter-spacing: .2em; font-weight: 700; color: #526d50; }
+h1 { font-size: clamp(26px, 6vw, 36px); margin: 12px 0; }
+header > p:last-child { color: #58675d; }
+form { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 32px; }
+label { font-size: 14px; }
+input, button { font: inherit; border-radius: 6px; padding: 10px 12px; }
+input { color: inherit; background: #fff; border: 1px solid #8d9c8a; min-width: 160px; }
+button { background: #315b46; color: #fff; border: 1px solid #315b46; cursor: pointer; }
+button:hover { background: #234332; }
+:focus-visible { outline: 3px solid #b06d19; outline-offset: 3px; }
+section { padding: 24px; background: #fff; border: 1px solid #d9dfd3; border-radius: 12px; }
+h2 { font-size: 20px; margin-top: 0; }
+#status { color: #58675d; line-height: 1.7; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-size: 12px; color: #58675d; padding-bottom: 16px; }
+th, td { padding: 12px 8px; text-align: left; border-bottom: 1px solid #e5e9e1; }
+th:last-child, td:last-child { text-align: right; }
+thead th { font-size: 13px; color: #58675d; }
+.missing { color: #788273; }
+@media (max-width: 400px) {
+  section { padding: 16px; }
+  form { gap: 8px; }
+  label { width: 100%; }
+}
