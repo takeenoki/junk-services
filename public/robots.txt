@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://junk-services.r32952507.workers.dev/sitemap.xml
