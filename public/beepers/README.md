@@ -27,6 +27,10 @@ npm run dev:beepers
 
 ## API
 
+- `POST /api/beepers/log`: `{ operation: "SAMPLE" | "PUT", type: 1..20 }`。
+  試聴・投稿ボタンの押下時に1回送信し、Workersに `BEEPERS [INFO] SAMPLE 1` などの形式で出力します。
+  ボタンを離す時や3秒到達時には出力せず、押下時間も含めません。
+  ログ送信は再試行せず、通信失敗は再生・投稿に影響しません。
 - `GET /api/beepers/state`: スナップショット、サーバー時刻、投稿制限状態。
 - `GET /api/beepers/ws`: WebSocket。初期状態と各変更の完全スナップショットを通知。
 - `POST /api/beepers/start`: `{ type: 1..20, requestId: UUID, pressedAtMs: number }`。

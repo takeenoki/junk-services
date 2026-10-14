@@ -35,10 +35,26 @@ function json(data: unknown, status = 200, headers: HeadersInit = {}) {
   return Response.json(data, { status, headers: { "Cache-Control": "no-store", ...headers } });
 }
 
-export function handleBeepers(request: Request, env: Env) {
+export async function handleBeepers(request: Request, env: Env) {
   const url = new URL(request.url);
   const origin = request.headers.get("Origin");
   if (origin && origin !== url.origin) return json({ error: "同じサイトから操作してください。" }, 403);
+  if (url.pathname === "/api/beepers/log") {
+    if (request.method !== "POST") return json({ error: "POSTを使用してください。" }, 405);
+    let body: Record<string, unknown>;
+    try {
+      const text = await request.text();
+      if (text.length > 2048) throw new Error();
+      body = JSON.parse(text);
+      if (!body || typeof body !== "object") throw new Error();
+    } catch { return json({ error: "不正なリクエストです。" }, 400); }
+    if ((body.operation !== "SAMPLE" && body.operation !== "PUT") ||
+        !Number.isInteger(body.type) || Number(body.type) < 1 || Number(body.type) > 20) {
+      return json({ error: "不正な操作またはボタン番号です。" }, 400);
+    }
+    console.info(`BEEPERS [INFO] ${body.operation} ${body.type}`);
+    return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+  }
   return env.BEEPERS.get(env.BEEPERS.idFromName("shared-track")).fetch(request);
 }
 
