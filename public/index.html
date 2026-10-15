@@ -13,7 +13,11 @@
   <body>
     <main>
       <header><h1>Junk Services</h1></header>
-      <section aria-labelledby="discover-heading">
+      <nav class="tabs" role="tablist" aria-label="一覧の種類">
+        <button type="button" id="service-tab" role="tab" aria-selected="true" aria-controls="service-panel" tabindex="0">Service</button>
+        <button type="button" id="api-tab" role="tab" aria-selected="false" aria-controls="api-panel" tabindex="-1">API</button>
+      </nav>
+      <section id="service-panel" role="tabpanel" aria-labelledby="service-tab">
         <h2 id="installation-heading">インスタレーション<span lang="en"> / Installation</span></h2>
         <div class="service-grid">
           <article class="service-card">
@@ -45,7 +49,7 @@
             <button type="button" aria-expanded="false" aria-controls="random-magazine-title-description" hidden>もっと読む</button>
           </article>
         </div>
-        <h2 id="discover-heading">無駄<span lang="en"> / Waste</span></h2>
+        <h2 id="waste-heading">無駄<span lang="en"> / Waste</span></h2>
         <div class="service-grid">
           <article class="service-card">
             <h3><a href="/steps/">武えのきの歩数</a></h3>
@@ -53,6 +57,13 @@
             <button type="button" aria-expanded="false" aria-controls="steps-description" hidden>もっと読む</button>
           </article>
         </div>
+      </section>
+      <section id="api-panel" role="tabpanel" aria-labelledby="api-tab" hidden>
+        <h2>公開API</h2>
+        <ul class="api-list">
+          <li><a href="/about-me/swagger/">about-me <span>Swagger</span></a></li>
+          <li><a href="/steps/swagger/">steps <span>Swagger</span></a></li>
+        </ul>
       </section>
     </main>
   </body>

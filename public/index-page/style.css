@@ -64,3 +64,12 @@ button {
   .service-card { padding: 8px; }
   h3 { font-size: .9rem; }
 }
+
+[hidden] { display: none !important; }
+.tabs { display: flex; gap: 24px; margin-top: 24px; border-bottom: 1px solid #245bb5; }
+.tabs button { padding: 8px 16px; text-decoration: none; border-bottom: 3px solid transparent; }
+.tabs button[aria-selected="true"] { border-bottom-color: #245bb5; font-weight: 700; }
+.api-list { display: grid; gap: 16px; padding: 0; list-style: none; }
+.api-list a { display: block; padding: 16px 24px; border: 1px solid #245bb5; }
+.api-list a:hover { background: #f5f8ff; }
+.api-list span { margin-left: 16px; font-size: .875rem; }

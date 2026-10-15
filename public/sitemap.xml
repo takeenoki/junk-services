@@ -21,4 +21,10 @@
   <url>
     <loc>https://junk-services.r32952507.workers.dev/steps/</loc>
   </url>
+  <url>
+    <loc>https://junk-services.r32952507.workers.dev/about-me/swagger/</loc>
+  </url>
+  <url>
+    <loc>https://junk-services.r32952507.workers.dev/steps/swagger/</loc>
+  </url>
 </urlset>
