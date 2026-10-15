@@ -1,0 +1,95 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "about-me API",
+    "version": "1.0.0",
+    "description": "リクエストURLとアクセス回数を返します。呼び出すたびにアクセス回数が1増加します。"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/api/about-me": {
+      "get": {
+        "summary": "URLとアクセス回数を取得",
+        "operationId": "getAboutMe",
+        "responses": {
+          "200": {
+            "description": "取得成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AboutMe"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "リクエスト識別子",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "データ未投入またはデータベース処理失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {
+              "X-Request-ID": {
+                "description": "リクエスト識別子",
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AboutMe": {
+        "type": "object",
+        "required": [
+          "url",
+          "accessCount"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://junk-services.r32952507.workers.dev/api/about-me"
+          },
+          "accessCount": {
+            "type": "integer",
+            "example": 123
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "自己紹介情報の取得に失敗しました。"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+body { margin: 0; background: #fff; }
+.docs-header { max-width: 1460px; margin: 24px auto; padding: 0 20px; font-family: system-ui, sans-serif; color: #245bb5; }
+.docs-header a { color: inherit; }
+.docs-header h1 { font-size: 1.5rem; }

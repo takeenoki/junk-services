@@ -1,0 +1,290 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "steps API",
+    "version": "1.0.0",
+    "description": "武えのきの日次歩数を認証なしで取得できます。公開する取得APIのみを掲載しています。すべてのレスポンスにCache-Control: no-storeが付与されます。"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/api/v1/daily-steps": {
+      "get": {
+        "summary": "指定期間の日次歩数を取得",
+        "description": "from、toはそれぞれ1つ必須です。両端を含み最大366日で、from ≤ toを指定します。他のクエリは指定できません。日付の昇順で返し、記録がない日は省略します。該当データがない場合はitemsが空配列になります。",
+        "operationId": "listDailySteps",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "description": "実在する日付（YYYY-MM-DD）",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "example": "2026-10-14"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "description": "実在する日付（YYYY-MM-DD）",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "example": "2026-10-14"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "取得成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "items"
+                  ],
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DailySteps"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "日付・クエリ・期間が不正",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "GET以外のメソッドは利用できません",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string",
+                  "example": "GET"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "データベース処理失敗",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "string",
+                  "example": "30"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/daily-steps/{date}": {
+      "get": {
+        "summary": "指定日の日次歩数を取得",
+        "description": "クエリパラメーターは指定できません。",
+        "operationId": "getDailySteps",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "description": "実在する日付（YYYY-MM-DD）",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+              "example": "2026-10-14"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "取得成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailySteps"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "日付・クエリ・期間が不正",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "指定日の記録なし（DAILY_STEPS_NOT_FOUND）",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "データベース処理失敗",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "string",
+                  "example": "30"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DailySteps": {
+        "type": "object",
+        "required": [
+          "date",
+          "steps",
+          "timezone",
+          "recordedAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+            "example": "2026-10-14"
+          },
+          "steps": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000,
+            "example": 8500
+          },
+          "timezone": {
+            "type": "string",
+            "example": "Asia/Tokyo"
+          },
+          "recordedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "記録日時（UTC）",
+            "example": "2026-10-14T12:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "更新日時（UTC）",
+            "example": "2026-10-14T12:01:00.000Z"
+          }
+        }
+      },
+      "Problem": {
+        "type": "object",
+        "required": [
+          "type",
+          "title",
+          "status",
+          "code",
+          "instance",
+          "traceId"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "format": "uri"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer"
+          },
+          "code": {
+            "type": "string",
+            "example": "VALIDATION_ERROR"
+          },
+          "instance": {
+            "type": "string",
+            "example": "/api/v1/daily-steps"
+          },
+          "traceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "errors": {
+            "type": "array",
+            "description": "入力検証エラー時の詳細",
+            "items": {
+              "type": "object",
+              "required": [
+                "field",
+                "code",
+                "message"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
