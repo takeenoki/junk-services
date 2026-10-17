@@ -1,2 +1,3 @@
 STEPS_GOOGLE_CLIENT_ID="your-client-id.apps.googleusercontent.com"
 STEPS_GOOGLE_SUB="your-google-sub"
+JEV_IMAGE_PLAYGROUND_API_KEY="your-vercel-ai-gateway-key"
