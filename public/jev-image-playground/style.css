@@ -1,0 +1,36 @@
+:root { color-scheme: light; font-family: system-ui, sans-serif; color: #253347; background: #f4f6f9; }
+* { box-sizing: border-box; }
+body { margin: 0; position: relative; }
+.home-link { position: absolute; right: 4px; margin: 0; padding: 0; color: #667085; font-size: .75rem; line-height: 1.4; }
+.home-link-top { top: 0; }
+.home-link-bottom { bottom: 0; }
+main { max-width: 850px; padding: 40px 22px 64px; margin: auto; }
+h1 { font-size: clamp(1.4rem, 4vw, 2rem); margin: 0 0 12px; }
+h2 { font-size: 1.1rem; margin: 0 0 20px; }
+.connection, .hint, small, figcaption { color: #667085; font-size: .85rem; line-height: 1.7; }
+.connection { overflow-wrap: anywhere; }
+.quota { margin: 28px 0; }
+.quota-label { display: flex; justify-content: space-between; gap: 10px; font-size: .9rem; }
+meter { display: block; width: 100%; height: 22px; accent-color: #356bba; }
+.card { padding: 24px; background: white; border: 1px solid #dce2ea; border-radius: 12px; margin-bottom: 20px; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+label { display: block; font-size: .9rem; font-weight: 600; margin: 16px 0 8px; }
+.upload { padding: 20px; border: 1px dashed #8b9db6; border-radius: 8px; background: #f8faff; }
+input[type=file] { display: block; margin-top: 12px; max-width: 100%; }
+textarea { display: block; width: 100%; padding: 12px; border: 1px solid #bbc5d3; border-radius: 7px; font: inherit; font-size: .95rem; resize: vertical; }
+textarea::placeholder { color: #828b99; }
+button { cursor: pointer; font: inherit; border-radius: 7px; }
+button:disabled { opacity: .5; cursor: default; }
+.tabs { display: flex; gap: 6px; border-bottom: 1px solid #dce2ea; padding-bottom: 10px; }
+.tabs button { border: 0; padding: 9px 22px; background: #edf1f6; color: #4c5c72; }
+.tabs button[aria-selected=true] { background: #e0eafa; color: #174f9a; font-weight: 700; }
+.primary { width: 100%; padding: 14px; color: white; background: #285eac; border: 0; font-weight: 600; }
+:focus-visible { outline: 3px solid #6797de; outline-offset: 3px; }
+figure { margin: 20px 0 0; }
+figure img { display: block; max-width: 100%; max-height: 350px; margin: auto; object-fit: contain; }
+figcaption { text-align: center; margin-top: 8px; }
+#message { min-height: 1.5em; color: #a12c30; line-height: 1.7; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .85rem; line-height: 1.7; background: #f5f7fa; padding: 14px; border-radius: 6px; max-height: 450px; overflow: auto; }
+summary { cursor: pointer; font-size: .9rem; padding: 12px 0; }
+[hidden] { display: none !important; }
+@media (max-width: 500px) { main { padding: 26px 14px; } .card { padding: 18px; } .tabs button { flex: 1; padding: 9px; } }

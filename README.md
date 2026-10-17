@@ -1,5 +1,10 @@
 # Junk Services
 
+## jev-image-playground
+
+`/jev-image-playground/` でJevの画像判定を試せます。
+設定・ローカル起動手順は [Jev README](public/jev-image-playground/README.md) を参照してください。
+
 ## steps
 
 `/steps/` で月別の歩数を公開します。Google IDトークンと許可subで更新APIを保護します。

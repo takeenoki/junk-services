@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jevの画像判定を試す</title>
+  <meta name="description" content="画像と質問を入力し、Jevのnoul・choice・score形式の判定を試せます。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://junk-services.r32952507.workers.dev/jev-image-playground/">
+  <meta property="og:title" content="Jevの画像判定を試す">
+  <meta property="og:description" content="画像と質問を入力し、Jevのnoul・choice・score形式の判定を試せます。">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:image" content="https://junk-services.r32952507.workers.dev/jev-image-playground/ogp.png">
+  <meta property="og:image:width" content="1000">
+  <meta property="og:image:height" content="525">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Jevの画像判定を試すページのタイトルと画像選択画面">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://junk-services.r32952507.workers.dev/jev-image-playground/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <a class="home-link home-link-top" href="/">TOPに戻る</a>
+  <main>
+    <header>
+      <h1>Jevの画像判定を試す</h1>
+      <p class="connection">接続先：<span id="endpoint">確認中</span><br>Jev：<span id="model">確認中</span></p>
+    </header>
+    <section class="quota" aria-label="本日の残リクエスト数">
+      <div class="quota-label"><span>本日の残リクエスト数</span><strong id="remaining">確認中</strong></div>
+      <meter id="gauge" min="0" max="200" value="0">0 / 200</meter>
+      <small>このプレイグラウンド全体で1日200回 · 日本時間0時にリセット</small>
+    </section>
+    <form id="form">
+      <fieldset id="inputs">
+        <section class="card">
+          <h2>画像</h2>
+          <label class="upload" for="image">画像を選択
+            <input id="image" type="file" accept="image/*" required>
+          </label>
+          <p class="hint">各辺280px以上。長辺が1568pxを超える画像は縮小します。</p>
+          <figure id="preview-container" hidden>
+            <img id="preview" alt="判定する画像のプレビュー">
+            <figcaption id="image-info"></figcaption>
+          </figure>
+        </section>
+        <section class="card">
+          <h2>判定条件</h2>
+          <div class="tabs" role="tablist" aria-label="出力形式">
+            <button type="button" role="tab" id="tab-noul" aria-selected="true" aria-controls="panel-noul" data-type="noul">noul</button>
+            <button type="button" role="tab" id="tab-choice" aria-selected="false" aria-controls="panel-choice" tabindex="-1" data-type="choice">choice</button>
+            <button type="button" role="tab" id="tab-score" aria-selected="false" aria-controls="panel-score" tabindex="-1" data-type="score">score</button>
+          </div>
+          <div id="panel-noul" role="tabpanel" aria-labelledby="tab-noul">
+            <p class="hint">はい・いいえで答えられる質問を入力してください。はいの確率を0〜1で返します。</p>
+            <label for="question-noul">質問</label>
+            <textarea id="question-noul" rows="3" maxlength="4000" placeholder="この画像には猫が写っていますか？" required></textarea>
+          </div>
+          <div id="panel-choice" role="tabpanel" aria-labelledby="tab-choice" hidden>
+            <p class="hint">画像に最も合う選択肢を選びます。選択肢は1行に1つ、2つ以上入力してください。</p>
+            <label for="question-choice">質問</label>
+            <textarea id="question-choice" rows="3" maxlength="4000" placeholder="画像の主な被写体は何ですか？" disabled required></textarea>
+            <label for="criteria-choice">選択肢</label>
+            <textarea id="criteria-choice" rows="4" placeholder="猫&#10;犬&#10;その他" disabled required></textarea>
+          </div>
+          <div id="panel-score" role="tabpanel" aria-labelledby="tab-score" hidden>
+            <p class="hint">画像を段階的な基準で評価します。低い評価から順に1行ずつ、2段階以上入力してください。行の順序が0から始まるスコアになります。</p>
+            <label for="question-score">質問</label>
+            <textarea id="question-score" rows="3" maxlength="4000" placeholder="この写真はどのくらい明るいですか？" disabled required></textarea>
+            <label for="criteria-score">クライテリア</label>
+            <textarea id="criteria-score" rows="4" placeholder="暗く、被写体が見えにくい&#10;適度な明るさで、被写体が見える&#10;とても明るい" disabled required></textarea>
+          </div>
+        </section>
+      </fieldset>
+      <button id="submit" class="primary" type="submit" disabled>判定する</button>
+    </form>
+    <p id="message" role="status" aria-live="polite"></p>
+    <section class="card results" aria-labelledby="result-title">
+      <h2 id="result-title">結果</h2>
+      <pre id="result">まだ判定していません。</pre>
+      <details><summary>リクエスト</summary><pre id="request">まだ送信していません。</pre></details>
+      <details><summary>レスポンス</summary><pre id="response">まだ受信していません。</pre></details>
+    </section>
+  </main>
+  <a class="home-link home-link-bottom" href="/">TOPに戻る</a>
+</body>
+</html>
