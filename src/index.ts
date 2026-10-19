@@ -5,6 +5,7 @@ import { handleAboutMe } from "./api/about_me";
 import { handleBeepers } from "./api/beepers";
 import { handleSteps } from "./api/steps";
 import { handleJevImagePlayground } from "./api/jev-image-playground";
+import { handleJevMazeDemo } from "./api/jev-maze-demo";
 export { Beepers } from "./api/beepers";
 export { Minamo } from "./api/minamo";
 
@@ -23,6 +24,10 @@ interface Env {
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const path = new URL(request.url).pathname;
+
+    if (path === "/api/jev-maze-demo") {
+      return handleJevMazeDemo(request, env);
+    }
 
     if (path === "/api/jev-image-playground") {
       return handleJevImagePlayground(request, env);
