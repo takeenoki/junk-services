@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jevに迷路を解かせるデモ</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="script.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Jevに迷路を解かせるデモ</h1>
+      <p class="connection">接続先: https://ai-gateway.vercel.sh/typesafe/ <span>バージョン: Jev1.14</span></p>
+    </header>
+    <section class="quota" aria-label="本日の残リクエスト数">
+      <div class="quota-label"><span>本日の残リクエスト数</span><strong id="remaining">確認中</strong></div>
+      <meter id="gauge" min="0" max="2000" value="0">0 / 2000</meter>
+      <small>このデモ全体で1日2000回 · 日本時間0時にリセット</small>
+      <p id="quota-message" role="status" aria-live="polite"></p>
+    </section>
+    <section class="about-page" aria-labelledby="about-title">
+      <h2 id="about-title">当ページについて</h2>
+      <p>このページは、Jevに迷路を解かせることができるかを検証したデモページです。</p>
+      <p>今回の方法では、Jevはゴールに向かうために一時的に遠回りが必要な経路を選ばないことが多く、マスが小さくなると壁を認識できない場面も見られました。安定して迷路を解かせることはできませんでしたが、検証結果としてこのページを公開しています。Jevへの指示は「指示・選択肢」のセクションをご覧ください。</p>
+    </section>
+    <div class="workspace">
+    <section class="maze-panel" aria-label="迷路">
+      <div class="maze-controls">
+        <button id="generate" type="button">初期化</button>
+        <label for="size">迷路サイズ</label>
+        <select id="size">
+          <option value="9">9×9</option>
+          <option value="16">16×16</option>
+          <option value="25">25×25</option>
+        </select>
+        <button id="advance" type="button" disabled>迷路を解く</button>
+      </div>
+      <canvas id="maze" width="720" height="720" role="img" aria-label="9×9の迷路。スタートは左上、ゴールGは右下。現在位置は赤丸。">9×9の迷路を表示します。Canvas対応ブラウザーをご利用ください。</canvas>
+    </section>
+    <div class="side-panel">
+    <section class="decision-panel" aria-labelledby="instructions-title">
+      <div>
+        <h2 id="instructions-title">指示・選択肢</h2>
+        <p id="instructions" lang="en"></p>
+        <ul id="choices" lang="en"></ul>
+      </div>
+    </section>
+    <section aria-labelledby="result-title">
+      <h2 id="result-title">結果</h2>
+      <p id="result" role="status" aria-live="polite">初期化ボタンを押してください。</p>
+    </section>
+    </div>
+    </div>
+    <div class="details">
+      <section aria-labelledby="request-title"><h2 id="request-title">リクエスト</h2><pre id="request">まだ送信していません。</pre></section>
+      <section aria-labelledby="response-title"><h2 id="response-title">レスポンス</h2><pre id="response">まだ受信していません。</pre></section>
+    </div>
+    <footer><a href="/">トップに戻る</a></footer>
+  </main>
+</body>
+</html>
