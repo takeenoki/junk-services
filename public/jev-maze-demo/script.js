@@ -45,7 +45,7 @@ function updateButtons() {
   $('generate').disabled = busy;
   $('size').disabled = busy;
   $('advance').disabled = busy || !maze || atGoal() || !quota || quota.remaining <= 0;
-  $('advance').textContent = busy ? '判定中…' : '迷路を解く';
+  $('advance').textContent = busy ? '判定中…' : '迷路を進む';
 }
 
 function draw() {
@@ -87,11 +87,23 @@ $('generate').addEventListener('click', () => {
   size = Number($('size').value);
   maze = generateMaze(size);
   position = { x: 0, y: 0 };
-  $('result').textContent = size + '×' + size + 'の迷路を生成しました。「迷路を解く」ボタンを押してください。';
+  $('result').textContent = size + '×' + size + 'の迷路を生成しました。「迷路を進む」ボタンを押してください。';
   $('request').textContent = 'まだ送信していません。';
   $('response').textContent = 'まだ受信していません。';
   draw();
   updateButtons();
+});
+
+canvas.addEventListener('click', event => {
+  if (!maze || busy) return;
+  const rect = canvas.getBoundingClientRect();
+  const width = rect.width - canvas.clientLeft * 2;
+  const height = rect.height - canvas.clientTop * 2;
+  const x = Math.floor((event.clientX - rect.left - canvas.clientLeft) / width * size);
+  const y = Math.floor((event.clientY - rect.top - canvas.clientTop) / height * size);
+  if (x < 0 || y < 0 || x >= size || y >= size) return;
+  maze[y][x] = maze[y][x] === 0 ? 1 : 0;
+  draw();
 });
 
 $('advance').addEventListener('click', async () => {
