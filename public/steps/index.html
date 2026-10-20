@@ -35,7 +35,10 @@
       </form>
       <section aria-labelledby="month-heading" aria-busy="true" id="results">
         <h2 id="month-heading">月別の歩数</h2>
-        <p id="status" role="status" aria-live="polite">読み込み中…</p>
+        <p class="month-summary" role="status" aria-live="polite">
+          <span id="status">読み込み中…</span>
+          <span id="month-total" hidden></span>
+        </p>
         <div class="table-wrap">
           <table hidden id="steps-table">
             <caption>日別の歩数（未記録の日は「—」）</caption>

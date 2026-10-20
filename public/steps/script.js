@@ -1,5 +1,6 @@
 const monthInput = document.querySelector("#month");
 const status = document.querySelector("#status");
+const monthTotal = document.querySelector("#month-total");
 const table = document.querySelector("#steps-table");
 const days = document.querySelector("#days");
 const results = document.querySelector("#results");
@@ -21,6 +22,7 @@ async function loadMonth() {
   const count = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][monthNumber - 1];
   heading.textContent = `${year}年${monthNumber}月`;
   table.hidden = true;
+  monthTotal.hidden = true;
   days.replaceChildren();
   status.textContent = "読み込み中…";
   results.setAttribute("aria-busy", "true");
@@ -47,6 +49,9 @@ async function loadMonth() {
     }
     days.append(fragment);
     status.textContent = items.size ? `${items.size}日分の記録があります。` : "この月の記録はありません。";
+    const total = [...items.values()].reduce((sum, steps) => sum + steps, 0);
+    monthTotal.textContent = `月の合計：${number.format(total)} 歩`;
+    monthTotal.hidden = false;
     table.hidden = false;
   } catch (error) {
     if (error.name !== "AbortError") status.textContent = "歩数を取得できませんでした。時間をおいて「表示」を押してください。";
